@@ -53,4 +53,4 @@ Router::post('/{username}/photos', 'profileController@Postphotos');
 Router::post('/{username}/videos', 'profileController@Postvideos');
 
 //Start constructing the pattern and params
-echo Router::execute();
+echo Router::dispatch();

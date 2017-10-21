@@ -1,5 +1,4 @@
 <?php
-
 /*
  * MIT License
  * 
@@ -93,7 +92,7 @@ class Router{
     }
 
     //This is where all the magic happens. Bootup the router and start constructing the pattern and params
-    public static function execute(){
+    public static function dispatch(){
         $binder = null;
         $request = self::request();
         $route = self::uri();
