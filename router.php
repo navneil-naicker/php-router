@@ -108,8 +108,11 @@ class Router{
                         $uri = self::make_array( $route );
                         foreach( $binder as $key => $item ){
                             $routes = self::make_array( $key );
-                            foreach( $routes as $rk => $ri ){
+                            foreach( $routes as $rk => $ri ){                                
                                 if( ($ri == $uri[$rk]) or ($count == 1 and preg_match('/\{(.*?)\}/', $ri)) ){
+                                    self::$pattern = $binder[$key];
+                                    self::make_params( $uri, $key );
+                                } else {
                                     self::$pattern = $binder[$key];
                                     self::make_params( $uri, $key );
                                 }

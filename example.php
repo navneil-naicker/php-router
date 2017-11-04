@@ -32,6 +32,7 @@ Router::get('/{username}/photos', 'profileController@photos');
 Router::get('/{username}/videos', 'profileController@videos');
 
 Router::get('/resources', 'resourcesController@index');
+Router::get('/{username}/{tab}', 'profileController@Postvideos');
 
 //POST
 Router::post('/', 'homeController@Postindex');
