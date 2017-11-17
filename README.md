@@ -1,2 +1,2 @@
 <h3>PHP Router</h3>
-<p>Inspired from Symfony and Laravel Routing engine, this class handles basic routing. See the example.php for usage.</p>
+<p>Inspired from Symfony and Laravel Routing engine, this class handles basic routing. See the <a href="https://github.com/navneil-naicker/php-router/blob/master/example.php">example.php</a> for usage.</p>
