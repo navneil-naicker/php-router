@@ -33,7 +33,9 @@ class Router{
     
     //Get the current URI and clean it up
     public static function uri( $uri = '' ){
-        if( empty($uri) ){
+        if( empty($uri) and defined('ABSPATH') ){
+            $uri = str_replace(get_site_url(), null, get_permalink());
+        } else if( empty($uri) ){
             if( !isset($_GET['uri']) ){
                 $uri = '/';
             } else {
