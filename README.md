@@ -1,8 +1,10 @@
 
 **PHP Router**
+
 Inspired from Symphony and Laravel routing engine, this class handles basic HTTP routing.
   
 **.htaccess**
+
 Your htaccess should look something like below
 
     <IfModule mod_rewrite.c>
@@ -15,16 +17,19 @@ Your htaccess should look something like below
     </IfModule>
 
 **How to use it**
+
 Download and place the router.php class on your application directory. E.g. App/router.php and then require router.php script from your index.php file e.g.
 
     require_once( dirname(__FILE__) .  '/App/router.php' );
 
 **GET Route**
+
 The following example matches the GET request to the HomeController@index
 
     Router::get('/', 'HomeController@index');
 
 **POST Route**
+
 The following example matches the POST request to the HomeController@Postindex
 
     Router::post('/', 'homeController@Postindex');
