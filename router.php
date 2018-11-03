@@ -33,9 +33,7 @@ class Router{
     
     //Get the current URI and clean it up
     public static function uri( $uri = '' ){
-        if( empty($uri) and defined('ABSPATH') ){
-            $uri = str_replace(get_site_url(), null, get_permalink());
-        } else if( empty($uri) ){
+        if( empty($uri) ){
             if( !isset($_GET['uri']) ){
                 $uri = '/';
             } else {
@@ -108,20 +106,23 @@ class Router{
                 } else {
                     if( is_array($binder) ){
                         $uri = self::make_array( $route );
+                        $probability = array();
+                        $probability_uri = array();
                         foreach( $binder as $key => $item ){
-                            $routes = self::make_array( $key );
-                            foreach( $routes as $rk => $ri ){
-                                if( empty(preg_match('/\{(.*?)\}/', $ri)) and empty($binder[$route]) ){
-                                    self::$pattern = null;
-                                } else if( ($ri == $uri[$rk]) or ($count == 1 and !empty(preg_match('/\{(.*?)\}/', $ri)) ) and empty($binder[$route]) ){
-                                    self::$pattern = $binder[$key];
-                                    self::make_params( $uri, $key );
-                                } else if( !empty(preg_match('/\{(.*?)\}/', $ri)) and empty($binder[$route]) ){
-                                    self::$pattern = $binder[$key];
-                                    self::make_params( $uri, $key );
+                            if( preg_match_all('/{+(.*?)}/', $key) > 0 ){
+                                $routes = self::make_array( $key );
+                                foreach( $routes as $rk => $ri ){
+                                    if( $uri[$rk] == $ri ){
+                                        $probability[$item] = (!empty($probability[$item])?$probability[$item]:0) + 1;
+                                        $probability_uri[$item] = $key;
+                                    }
                                 }
-                            }
+                            } 
                         }
+                        arsort( $probability );
+                        self::$pattern = !empty(key($probability))?key($probability):null;
+                        $key = (!empty($probability_uri[self::$pattern]))?$probability_uri[self::$pattern]:null;
+                        self::make_params( $uri, $key );
                     }
                 }
             } else {
